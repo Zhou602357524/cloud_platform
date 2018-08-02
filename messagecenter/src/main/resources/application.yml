@@ -10,3 +10,6 @@ spring:
     name: message_center
 server:
   port: 8080
+mybatis:
+  mapper-locations: mappers/*Mapper.xml
+  type-aliases-package: com.qianli.ilink.cloud_platform.messagecenter.core.entity,com.qianli.ilink.cloud_platform.commons.core.eneity

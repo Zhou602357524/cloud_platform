@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TestMapper extends BastMapper{
 
@@ -14,10 +15,10 @@ public interface TestMapper extends BastMapper{
 
     @Override
     @Select("select * from act_id_info")
-    List getList();
+    List<Map> getList();
 
     @Override
-    @Select("select * from act_id_info where id = #{}")
-    Object getById(@Param("id") long id);
+    @Select("select * from act_id_info where id = #{id}")
+    Map getById(@Param("id") long id);
 
 }

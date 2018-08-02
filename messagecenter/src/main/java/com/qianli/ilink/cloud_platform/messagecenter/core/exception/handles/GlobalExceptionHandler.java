@@ -6,7 +6,6 @@ import com.qianli.ilink.cloud_platform.commons.core.eneity.FieldErrorEntity;
 import com.qianli.ilink.cloud_platform.commons.core.enums.ResultEnum;
 import com.qianli.ilink.cloud_platform.commons.core.utils.ResponseEntityUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.stream.Stream;
 
 @ControllerAdvice
 @ResponseBody

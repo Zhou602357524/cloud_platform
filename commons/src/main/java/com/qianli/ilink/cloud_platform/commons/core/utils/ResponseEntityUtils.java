@@ -5,11 +5,11 @@ import com.qianli.ilink.cloud_platform.commons.core.enums.ResultEnum;
 
 public class ResponseEntityUtils {
 
-    public static ResponseEntity builderSuccess(Object data) {
+    public static ResponseEntity buildSuccess(Object data) {
         return build(ResultEnum.SUCCESS,data);
     }
 
-    public static ResponseEntity builderSuccess() {
+    public static ResponseEntity buildSuccess() {
         return build(ResultEnum.SUCCESS);
     }
 

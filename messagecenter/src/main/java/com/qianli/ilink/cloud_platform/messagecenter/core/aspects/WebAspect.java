@@ -31,12 +31,15 @@ public class WebAspect {
     public Object recordingWebLogs(ProceedingJoinPoint point) {
         String url;
         RequestAttributes ra = RequestContextHolder.getRequestAttributes();
+        String UNKNOWN_URL = "unknown url";
         try {
             ServletRequestAttributes sra = (ServletRequestAttributes) ra;
-            HttpServletRequest request = sra.getRequest();
-            url = request.getRequestURL().toString();
+            if (sra != null ) {
+                HttpServletRequest request = sra.getRequest();
+                url = request.getRequestURL().toString();
+            } else url = UNKNOWN_URL;
         } catch (Exception e) {
-            url = "unknown url";
+            url = UNKNOWN_URL;
         }
         StopWatch stopWatch = startStopWatch();
         String methodName = point.getSignature().getName();

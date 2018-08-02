@@ -25,7 +25,7 @@ public class HelloController {
 
     @PostMapping("hello2")
     public ResponseEntity hello2(@Valid @RequestBody @ApiParam() UserEntity user){
-        return ResponseEntityUtils.builderSuccess(user);
+        return ResponseEntityUtils.buildSuccess(user);
     }
 
 }
