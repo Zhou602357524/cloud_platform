@@ -1,11 +1,15 @@
 spring:
   application:
-    name: cloud_platform-eureka-server
+    name: cloud-platform-eureka-server
 server:
   port: 8001
+logging:
+  level:
+    com: debug
 eureka:
-  client:
-      service-url:
-          defaultZone: http://peer1:8000/eureka/
   instance:
-    hostname: peer2
+    #cloud 推荐使用ip方式 http://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.0.1.RELEASE/multi/multi_spring-cloud-eureka-server.html
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://peer1:8000/eureka/

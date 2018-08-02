@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: cloud_platform-gateway
+server:
+  port: ${SERVER_PORT:9000}
+logging:
+  level:
+    com: debug
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://peer1:8000/eureka/,http://peer2:8001/eureka/}
+zuul:
+  routes:
+    users:
+      path: /eureka-client/**
+      serviceId: eureka-client-a
