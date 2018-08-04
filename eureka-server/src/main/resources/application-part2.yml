@@ -8,8 +8,7 @@ logging:
     com: debug
 eureka:
   instance:
-    #cloud 推荐使用ip方式 http://cloud.spring.io/spring-cloud-static/spring-cloud-netflix/2.0.1.RELEASE/multi/multi_spring-cloud-eureka-server.html
-    prefer-ip-address: true
+    hostname: peer1
   client:
     service-url:
       defaultZone: http://peer1:8000/eureka/
