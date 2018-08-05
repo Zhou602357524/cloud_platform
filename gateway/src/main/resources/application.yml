@@ -15,6 +15,14 @@ eureka:
 zuul:
   ignored-services: '*'
   routes:
-      eureka-client-a:
-        path: /eureka-client/**
-        serviceId: eureka-client-a
+    eureka-client-a:
+      path: /eureka-client-a/**
+      serviceId: eureka-client-a
+    eureka-client-b:
+      path: /eureka-client-b/**
+      serviceId: eureka-client-b
+  #prefix: 'api'
+#设置全局超时时间 测试微服务rpc调用超时 测试单体服务超时
+ribbon:
+  ReadTimeout: 6000
+
