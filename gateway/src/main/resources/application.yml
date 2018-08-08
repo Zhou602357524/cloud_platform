@@ -14,8 +14,8 @@ spring:
       routes:
         #自定义id，不指定会默认uuid
       - id: eureka-client-a
-        #predicates匹配后转发服务
-        uri: lb://EUREKA-CLIENT-A
+        #predicates匹配后转发服务 默认大写，设置lower-case-service-id后可以改为小写
+        uri: lb://eureka-client-a
         #符合如下配置的地址会被该routes拦截 并转发到上面配置的uri
         predicates:
         - Path=/api/client/**
