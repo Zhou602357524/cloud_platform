@@ -1,11 +1,11 @@
 package com.qianli.ilink.cloud_platform.messagecenter;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
-@MapperScan("com.qianli.ilink.cloud_platform.messagecenter.dao")
+@EnableTransactionManagement
 public class MessagecenterApplication {
 
 	public static void main(String[] args) {

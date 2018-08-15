@@ -46,10 +46,11 @@ public class WebAspect {
         log.info("request from url : {} ,request from method : {} ",url,methodName);
         Object result;
         try {
-            result = point.proceed();
+            Object[] args = point.getArgs();
+            result = point.proceed(args);
             stopWatch.stop();
             long timeConsumMillis = stopWatch.getTotalTimeMillis();
-            log.info("request from url : {} ,response result : {} ,time consum : {} millis ",url,methodName, timeConsumMillis);
+            log.info("request from url : {} ,response result : {} ,time consum : {} millis , args : {}",url,result, timeConsumMillis,args);
             if (timeConsumMillis > timeOut)
                 log.warn("warning request url time out , url : {} , time consum : {}",url,timeConsumMillis);
         } catch (Throwable throwable) {

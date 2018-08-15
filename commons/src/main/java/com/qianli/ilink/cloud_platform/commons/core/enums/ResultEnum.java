@@ -9,10 +9,6 @@ public enum ResultEnum implements BaseEnum{
     ILLEGAL_ARGUMENT_ERROR(-4,"illegal_argument_error","非法参数错误"),
 
 
-
-
-
-
     UNKNOWN_ERROR(-999, "unknown_error", "未知错误");
 
     private int code;

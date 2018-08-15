@@ -1,4 +1,4 @@
-package com.qianli.ilink.cloud_platform.api;
+package com.qianli.ilink.cloud_platform.geteway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

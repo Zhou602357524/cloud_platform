@@ -12,5 +12,4 @@ public interface BaseEnum{
 
     String getDetails();
 
-
 }

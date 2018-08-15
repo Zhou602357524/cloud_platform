@@ -14,16 +14,16 @@ public class ResponseEntityUtils {
     }
 
     public static ResponseEntity build(ResultEnum resultEnum,Object data) {
-        return buildEmpty().setErrorCode(resultEnum.getCode()).setMsg(resultEnum.getMsg()).setDetails(resultEnum.getDetails()).setData(data);
+        return empty().setCode(resultEnum.getCode()).setMsg(resultEnum.getMsg()).setDetails(resultEnum.getDetails()).setData(data);
     }
 
     public static ResponseEntity build(ResultEnum resultEnum) {
         return build(resultEnum,null);
     }
 
-    public static ResponseEntity buildEmpty() {
+    public static ResponseEntity empty() {
 
-        return new ResponseEntity();
+        return ResponseEntity.empty();
     }
 
 }

@@ -7,9 +7,34 @@ spring:
     password: root
     url: jdbc:mysql://localhost:3306/activiti?characterEncoding=UTF-8&useSSL=true
   application:
-    name: message_center
+    name: message
+  profiles:
+    active: test
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database: mysql
+  data:
+    mongodb:
+      host: 192.168.10.28
+      port: 27017
+      database: test
+      uri: mongodb://192.168.10.28:27017/test
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8000/eureka/
+  instance:
+    hostname: message-center
+    prefer-ip-address: true
+---
+spring:
+  profiles: test
 server:
-  port: 8080
-mybatis:
-  mapper-locations: mappers/*Mapper.xml
-  type-aliases-package: com.qianli.ilink.cloud_platform.messagecenter.core.entity,com.qianli.ilink.cloud_platform.commons.core.eneity
+  port: 9000
+---
+spring:
+  profiles: dev
+server:
+  port: 9001
