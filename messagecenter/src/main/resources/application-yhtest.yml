@@ -24,7 +24,7 @@ spring:
       database: karawebhook
       uri: mongodb://10.19.15.43:37017/karawebhook
 heartbeat:
-  udpServerList: 127.0.0.1:12222,127.0.0.1:13333
+  udpServerList: 127.0.0.1:18080,127.0.0.1:13333
   retryTimes: 3
 eureka:
   client:

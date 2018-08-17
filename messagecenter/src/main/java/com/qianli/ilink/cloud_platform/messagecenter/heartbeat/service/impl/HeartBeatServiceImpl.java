@@ -1,5 +1,6 @@
 package com.qianli.ilink.cloud_platform.messagecenter.heartbeat.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.qianli.ilink.cloud_platform.messagecenter.heartbeat.config.HeartBeatConfig;
 import com.qianli.ilink.cloud_platform.messagecenter.heartbeat.service.HeartBeatSender;
 import com.qianli.ilink.cloud_platform.messagecenter.heartbeat.service.UdpServerNodeManager;
@@ -26,6 +27,7 @@ public class HeartBeatServiceImpl implements HeartBeatSender {
 
     @Override
     public void execute() {
+        log.info("heartBeat schedule task start...");
         String udpServerListStr = heartBeatConfig.getUdpServerList();
         if(StringUtils.isEmpty(udpServerListStr)){
             log.error("heartBeat udpServerList 配置项异常...");
@@ -39,6 +41,7 @@ public class HeartBeatServiceImpl implements HeartBeatSender {
                 udpServerNodeManager.refreshWithFail(udpServer);
             }
         });
+        log.info("current udp server nodes : {}", JSON.toJSONString(udpServerNodeManager.getValidUdpServerNodes()));
     }
 
     private boolean sendHeartBeat(String udpServer) {
