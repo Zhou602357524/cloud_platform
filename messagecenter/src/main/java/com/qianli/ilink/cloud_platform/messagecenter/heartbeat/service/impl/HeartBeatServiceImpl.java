@@ -55,7 +55,7 @@ public class HeartBeatServiceImpl implements HeartBeatSender {
             client.connect(address, 1000);
             flag = true;
         } catch (IOException e) {
-            log.error("heartBeat send fail...",e);
+            log.error("heartBeat send fail...{}",e.getLocalizedMessage());
             flag = false;
         }finally{
             if(client!=null){
