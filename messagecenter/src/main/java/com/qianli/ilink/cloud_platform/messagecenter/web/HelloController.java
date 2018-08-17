@@ -15,9 +15,15 @@ public class HelloController {
     private int port;
     @RequestMapping("hello")
     public String hello(String name) throws Exception {
+
+
         if (StringUtils.isEmpty(name))
-            throw new Exception();
+            throw new Exception("name is null");
+
         return "hello " + name + ":port = " + port;
     }
+
+
+
 
 }

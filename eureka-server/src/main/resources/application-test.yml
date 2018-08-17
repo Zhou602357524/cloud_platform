@@ -2,7 +2,7 @@ spring:
   application:
     name: cloud_platform-eureka-server
 server:
-  port: 8000
+  port: ${SERVER.PORT:8080}
 eureka:
   client:
     register-with-eureka: false
