@@ -15,7 +15,7 @@ import java.util.Properties;
  */
 @Slf4j
 @Component
-public class KafkaMessageSender {
+public class KafkaMessageSender{
 
     @Autowired
     private KafkaProducerConfig kafkaConfig;
