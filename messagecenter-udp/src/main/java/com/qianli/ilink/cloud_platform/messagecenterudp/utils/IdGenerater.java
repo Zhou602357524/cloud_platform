@@ -1,4 +1,4 @@
-package com.qianli.ilink.cloud_platform.messagecenter.utils;
+package com.qianli.ilink.cloud_platform.messagecenterudp.utils;
 
 import java.util.UUID;
 
