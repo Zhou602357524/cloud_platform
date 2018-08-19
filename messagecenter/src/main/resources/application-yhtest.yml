@@ -25,9 +25,9 @@ spring:
 #      uri: mongodb://10.19.15.43:37017/karawebhook
 kafka:
   messageTopic: messageReceiver
-  bootstrapServers: 127.0.0.1:9871
+  bootstrapServers: 127.0.0.1:9092
   batchSize: 16384
-  lingerMs: 1000
+  lingerMs: 5000
 heartbeat:
   udpServerList: 127.0.0.1:9000
   retryTimes: 3

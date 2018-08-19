@@ -1,9 +1,9 @@
-package com.qianli.ilink.cloud_platform.messagecenter.core.kafka.producer;
+package com.qianli.ilink.cloud_platform.messagecenter.mq.kafka;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -17,14 +17,8 @@ import java.util.Properties;
 @Component
 public class KafkaMessageSender {
 
-    @Value("${kafka.boostrapServers}")
-    private String boostrapServers;
-
-    @Value("${kafka.batchSize}")
-    private long batchSize;
-
-    @Value("${kafka.lingerMs}")
-    private long lingerMs;
+    @Autowired
+    private KafkaProducerConfig kafkaConfig;
 
     private KafkaProducer<String,String> producer;
 
@@ -32,14 +26,15 @@ public class KafkaMessageSender {
     public void start(){
         log.info("kafka producer initialize..");
         Properties properties = new Properties();
-        properties.put("bootstrap.servers",boostrapServers);
+        properties.put("bootstrap.servers",kafkaConfig.getBootstrapServers());
         properties.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         properties.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        properties.put("retries", 0);
         properties.put("acks","1");
         properties.put("buffer.memory",33554432);
         //1s or 到达batch.size 发送一次
-        properties.put("batch.size",batchSize);
-        properties.put("linger.ms",lingerMs);
+        properties.put("batch.size",kafkaConfig.getBatchSize());
+        properties.put("linger.ms",kafkaConfig.getLingerMs());
         producer = new KafkaProducer<>(properties);
         log.info("kafka producer start successful..");
     }

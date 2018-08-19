@@ -22,6 +22,9 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
+/**
+ * @author kangjuaner
+ */
 @Configuration
 @EnableScheduling
 @EnableAsync

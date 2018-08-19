@@ -27,7 +27,7 @@ public class HeartBeatServiceImpl implements HeartBeatSender {
 
     @Override
     public void execute() {
-        log.info("heartBeat schedule task start...");
+        log.debug("heartBeat schedule task start...");
         String udpServerListStr = heartBeatConfig.getUdpServerList();
         if(StringUtils.isEmpty(udpServerListStr)){
             log.error("heartBeat udpServerList 配置项异常...");
@@ -42,6 +42,7 @@ public class HeartBeatServiceImpl implements HeartBeatSender {
             }
         });
         log.info("current udp server nodes : {}", JSON.toJSONString(udpServerNodeManager.getValidUdpServerNodes()));
+        log.debug("heartBeat schedule task end...");
     }
 
     private boolean sendHeartBeat(String udpServer) {
