@@ -18,9 +18,7 @@ public class HeartBeatSchedule {
      */
     @Scheduled(fixedDelay = 5000)
     public void scheduleTask(){
-        log.info("heartBeat schedule task start...");
         heartBeatManager.execute();
-        log.info("heartBeat schedule task end...");
     }
 
 }

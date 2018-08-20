@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,11 +20,6 @@ public class UdpServerNodeManager {
     private HeartBeatConfig heartBeatConfig;
 
     private Map<String,UdpServerNode> udpServerNodeMap = new ConcurrentHashMap<>();
-    
-    @PostConstruct
-    public void init(){
-        //ps:如果
-    }
 
     public void refresh(String udpServer, UdpServerNode node) {
         udpServerNodeMap.put(udpServer,node);
@@ -47,6 +41,12 @@ public class UdpServerNodeManager {
         return udpServerNodeList.parallelStream().filter(udpServerNode -> udpServerNode.getStatus() == 0).collect(Collectors.toList());
     }
 
+    public List<String> getValidUdpServerNodes(){
+        List<UdpServerNode> validUdpServerNodeList = getValidUdpServerNodeList();
+        List<String> validUdpServerNodes = validUdpServerNodeList.parallelStream().map(udpServerNode -> udpServerNode.getIp()+":"+udpServerNode.getPort()).collect(Collectors.toList());
+        return validUdpServerNodes;
+    }
+
     public void refreshWithSuccess(String udpServer) {
         String ip = udpServer.split(":")[0];
         Integer port = Integer.parseInt(udpServer.split(":")[1]);
@@ -64,6 +64,7 @@ public class UdpServerNodeManager {
         if(node == null){
             //因为有node初始化,这段逻辑可能不会被执行
             refresh(udpServer,UdpServerNode.builder().ip(ip).port(port).retryTimes(1).status(0).build());
+            log.warn("node {}:{} retry {} times...",ip,port,1);
         }else{
             if(node.getStatus() == 1){
                 log.error("node {}:{} is invalid...",ip,port);
@@ -75,7 +76,7 @@ public class UdpServerNodeManager {
                 log.error("node {}:{} is invalid...",ip,port);
             }else{
                 node.setRetryTimes(retryTimes);
-                log.warn("node {}:{} retry {} times...",ip,port,retryTimes);
+                log.warn("node {}:{} retry {} times...",ip,port,currentRetryTimes);
             }
             refresh(udpServer,node);
         }

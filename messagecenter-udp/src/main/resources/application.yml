@@ -1,0 +1,9 @@
+kafka:
+  messageTopic: messageReceiver
+  bootstrapServers: 127.0.0.1:9092
+  batchSize: 16384
+  lingerMs: 5000
+udp:
+  port:
+    apUserInfoServerPort: 12222
+    userInternetLogServerPort: 13333

@@ -3,28 +3,33 @@ server:
 cloudPlatform:
   requestTimeOut: 5000
 spring:
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    username: insureusr
-    password: insureusr_Kara!
-    url: jdbc:mysql://10.19.15.43:39306/kara_insuredb?characterEncoding=UTF-8&useSSL=true
   application:
     name: message
-  profiles:
-    active: test
-  jpa:
+#  profiles:
+#    active: test
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    username: insureusr
+#    password: insureusr_Kara!
+#    url: jdbc:mysql://10.19.15.43:39306/kara_insuredb?characterEncoding=UTF-8&useSSL=true
+#  jpa:
 #    hibernate:
 #      ddl-auto: update
-    show-sql: true
-    database: mysql
-  data:
-    mongodb:
-      host: 10.19.15.43
-      port: 37017
-      database: karawebhook
-      uri: mongodb://10.19.15.43:37017/karawebhook
+#    show-sql: true
+#    database: mysql
+#  data:
+#    mongodb:
+#      host: 10.19.15.43
+#      port: 37017
+#      database: karawebhook
+#      uri: mongodb://10.19.15.43:37017/karawebhook
+kafka:
+  messageTopic: messageReceiver
+  bootstrapServers: 127.0.0.1:9092
+  batchSize: 16384
+  lingerMs: 5000
 heartbeat:
-  udpServerList: 127.0.0.1:12222,127.0.0.1:13333
+  udpServerList: 127.0.0.1:9000
   retryTimes: 3
 eureka:
   client:
