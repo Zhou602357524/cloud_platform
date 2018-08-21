@@ -80,7 +80,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                         .secret(passwordEncoder.encode(config.getClientSecret()))
                         .accessTokenValiditySeconds(config.getAccessTokenValiditySeconds())
                         .refreshTokenValiditySeconds(config.getRefreshTokenValiditySeconds())
-                        .authorizedGrantTypes("password","client_credentials","refresh_token")
+                        .authorizedGrantTypes("password","client_credentials")
                         .scopes("all");
             }
         }
