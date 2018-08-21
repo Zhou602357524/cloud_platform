@@ -27,8 +27,15 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
 
     private final String HEADER_AUTHENTICATED_USERID = "x-authenticated-userid";
 
+    private final String UNAUTHENTICATED_REQUEST_URL = "inner";
+
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+
+        if(exchange.getRequest().getPath().pathWithinApplication().value().contains(UNAUTHENTICATED_REQUEST_URL)){
+            return chain.filter(exchange);
+        }
 
         String token = exchange.getRequest().getHeaders().getFirst(HEADER_AUTHENTICATED_TOKEN);
         if (token == null || token.isEmpty()) {
