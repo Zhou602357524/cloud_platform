@@ -1,7 +1,7 @@
 package com.qianli.ilink.cloud_platform.messagecenter.web;
 
 import com.googlecode.protobuf.format.JsonFormat;
-import com.qianli.ilink.cloud_platform.messagecenter.enums.MessageType;
+import com.qianli.ilink.cloud_platform.messagecenter.enums.MessageEnum;
 import com.qianli.ilink.cloud_platform.messagecenter.pojo.dto.*;
 import com.qianli.ilink.cloud_platform.messagecenter.service.MessageSender;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ public class ApInfoController {
             log.info("api apbaseinfo request protobuf body is null...");
             return;
         }
-        messageSender.send(Message.builder().type(MessageType.AP_BASE_INFO.getValue()).body(new JsonFormat().printToString(apBaseInfo)).build());
+        messageSender.send(Message.builder().type(MessageEnum.AP_BASE_INFO.getMsg()).body(new JsonFormat().printToString(apBaseInfo)).build());
     }
 
     @RequestMapping(value = "/apstatusinfo", method = RequestMethod.POST,consumes = "application/x-protobuf")
@@ -33,7 +33,7 @@ public class ApInfoController {
             log.info("api apstatusinfo request protobuf body is null...");
             return;
         }
-        messageSender.send(Message.builder().type(MessageType.AP_STATUS_INFO.getValue()).body(new JsonFormat().printToString(apStatusInfo)).build());
+        messageSender.send(Message.builder().type(MessageEnum.AP_STATUS_INFO.getMsg()).body(new JsonFormat().printToString(apStatusInfo)).build());
     }
 
     @RequestMapping(value = "/aponlinestainfo", method = RequestMethod.POST,consumes = "application/x-protobuf")
@@ -42,7 +42,7 @@ public class ApInfoController {
             log.info("api aponlinestainfo request protobuf body is null...");
             return;
         }
-        messageSender.send(Message.builder().type(MessageType.AP_ONLINE_STA_INFO.getValue()).body(new JsonFormat().printToString(totalApOnlineStaInfo)).build());
+        messageSender.send(Message.builder().type(MessageEnum.AP_ONLINE_STA_INFO.getMsg()).body(new JsonFormat().printToString(totalApOnlineStaInfo)).build());
     }
 
     @RequestMapping(value = "/apofflinestainfo", method = RequestMethod.POST,consumes = "application/x-protobuf")
@@ -51,7 +51,7 @@ public class ApInfoController {
             log.info("api apofflinestainfo request protobuf body is null...");
             return;
         }
-        messageSender.send(Message.builder().type(MessageType.AP_OFFLINE_STA_INFO.getValue()).body(new JsonFormat().printToString(totalApOfflineStaInfo)).build());
+        messageSender.send(Message.builder().type(MessageEnum.AP_OFFLINE_STA_INFO.getMsg()).body(new JsonFormat().printToString(totalApOfflineStaInfo)).build());
     }
 
 }

@@ -6,12 +6,14 @@ import com.qianli.ilink.cloud_platform.messagecenter.mq.kafka.KafkaProducerConfi
 import com.qianli.ilink.cloud_platform.messagecenter.pojo.dto.Message;
 import com.qianli.ilink.cloud_platform.messagecenter.service.MessageSender;
 import com.qianli.ilink.cloud_platform.messagecenter.utils.IdGenerater;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 
 @Service
+@Slf4j
 public class MessageSenderImpl implements MessageSender {
 
     @Autowired
@@ -23,7 +25,7 @@ public class MessageSenderImpl implements MessageSender {
     @Async(value = "messageExecutor")
     @Override
     public void send(Message message) {
-        System.out.println("----------"+Thread.currentThread().getId()+"."+Thread.currentThread().getName());
+        log.info("----------"+Thread.currentThread().getId()+"."+Thread.currentThread().getName());
         kafkaMessageSender.execute(kafkaConfig.getMessageTopic(),IdGenerater.kafkaKey(), JSON.toJSONString(message));
     }
 }

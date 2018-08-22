@@ -4,7 +4,9 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
- * 实用工具类responseEntityUtils生成对应实体
+ * 实用工具类
+ * @see {@link com.qianli.ilink.cloud_platform.commons.core.utils.ResponseEntityUtils}
+ * 生成对应实体
  */
 @Data
 @Accessors(chain = true)

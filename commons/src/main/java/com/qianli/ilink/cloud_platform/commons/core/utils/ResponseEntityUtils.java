@@ -14,7 +14,8 @@ public class ResponseEntityUtils {
     }
 
     public static ResponseEntity build(ResultEnum resultEnum,Object data) {
-        return empty().setCode(resultEnum.getCode()).setMsg(resultEnum.getMsg()).setDetails(resultEnum.getDetails()).setData(data);
+        return empty().setCode(resultEnum.getCode()).setMsg(resultEnum.getMsg())
+                .setDetails(resultEnum.getDetails()).setData(data);
     }
 
     public static ResponseEntity build(ResultEnum resultEnum) {
