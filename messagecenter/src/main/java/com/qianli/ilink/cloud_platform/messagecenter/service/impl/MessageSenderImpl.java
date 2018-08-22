@@ -25,7 +25,6 @@ public class MessageSenderImpl implements MessageSender {
     @Async(value = "messageExecutor")
     @Override
     public void send(Message message) {
-        log.info("----------"+Thread.currentThread().getId()+"."+Thread.currentThread().getName());
         kafkaMessageSender.execute(kafkaConfig.getMessageTopic(),IdGenerater.kafkaKey(), JSON.toJSONString(message));
     }
 }
