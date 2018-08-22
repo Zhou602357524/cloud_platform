@@ -31,17 +31,10 @@ public class UserInternetLogMessageHandler extends SimpleChannelInboundHandler<D
     protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket msg){
         log.info("消息进入");
         ByteBuf content = msg.copy().content();
-        byte[] req = new byte[ content.readableBytes()];
-        content.readBytes(req);
-        UserInternetLogProto.TotalUserInternetLog totalUserInternetLog;
-        try {
-            totalUserInternetLog = UserInternetLogProto.TotalUserInternetLog.parseFrom(req);
-        } catch (InvalidProtocolBufferException e) {
-            log.error("gpb parse error...",e);
+        if(content == null){
             return;
         }
-        log.info("报文：{}",totalUserInternetLog);
-        messageSender.send(Message.builder().type(MessageType.USER_INTERNET_LOG.getValue()).body(new JsonFormat().printToString(totalUserInternetLog)).build());
+        messageSender.send(MessageType.USER_INTERNET_LOG.getValue(),content);
     }
 
     @Override

@@ -28,19 +28,12 @@ public class ApUserInfoMessageHandler extends SimpleChannelInboundHandler<Datagr
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket msg){
-        log.info("消息进入");
+        log.debug("消息进入");
         ByteBuf content = msg.copy().content();
-        byte[] req = new byte[ content.readableBytes()];
-        content.readBytes(req);
-        ApUserInfoProto.APUserInfo apUserInfo;
-        try {
-            apUserInfo = ApUserInfoProto.APUserInfo.parseFrom(req);
-        } catch (InvalidProtocolBufferException e) {
-            log.error("gpb parse error...",e);
+        if(content == null){
             return;
         }
-        log.info("报文：{}",apUserInfo);
-        messageSender.send(Message.builder().type(MessageType.USER_INTERNET_LOG.getValue()).body(new JsonFormat().printToString(apUserInfo)).build());
+        messageSender.send(MessageType.AP_USER_INFO.getValue(),content);
     }
 
     @Override

@@ -1,8 +1,9 @@
 package com.qianli.ilink.cloud_platform.messagecenterudp.service;
 
 
-import com.qianli.ilink.cloud_platform.messagecenterudp.pojo.dto.Message;
+import io.netty.buffer.ByteBuf;
 
 public interface MessageSender {
-    void send(Message message);
+
+    void send(String messageType, ByteBuf content);
 }
