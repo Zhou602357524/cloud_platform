@@ -29,7 +29,7 @@ public class UserInternetLogMessageHandler extends SimpleChannelInboundHandler<D
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, DatagramPacket msg){
-        log.info("消息进入");
+        log.debug("消息进入");
         ByteBuf content = msg.copy().content();
         if(content == null){
             return;
