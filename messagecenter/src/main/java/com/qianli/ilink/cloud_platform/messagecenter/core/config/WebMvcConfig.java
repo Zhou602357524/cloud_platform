@@ -47,13 +47,13 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         List<MediaType> supportedMediaTypes = new ArrayList<>();
         supportedMediaTypes.add(MediaType.TEXT_HTML);
         supportedMediaTypes.add(MediaType.APPLICATION_JSON_UTF8);
-        supportedMediaTypes.add(MediaType.ALL);
+        supportedMediaTypes.add(MediaType.APPLICATION_JSON);
         fastConverter.setSupportedMediaTypes(supportedMediaTypes);
         StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter(Charset.forName("utf-8"));
         ProtobufHttpMessageConverter protobufHttpMessageConverter = new ProtobufHttpMessageConverter();
         converters.add(stringHttpMessageConverter);
-        converters.add(protobufHttpMessageConverter);
         converters.add(fastConverter);
+        converters.add(protobufHttpMessageConverter);
     }
 
 

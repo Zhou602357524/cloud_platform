@@ -40,3 +40,8 @@ eureka:
 ribbon:
   ReadTimeout: 6000
 
+cloudplatform:
+  security:
+    oauth2:
+      jwtSigningKey: cloud_platform_jwt_signing_key
+

@@ -18,7 +18,7 @@ public class ApInfoController {
     @Autowired
     private MessageSender messageSender;
 
-    @RequestMapping(value = "/apbaseinfo", method = RequestMethod.POST)
+    @RequestMapping(value = "/apbaseinfo", method = RequestMethod.POST,consumes = "application/x-protobuf")
     public void apBaseInfoReceive(@RequestBody ApBaseInfoProto.ApBaseInfo apBaseInfo) {
         if(apBaseInfo == null){
             log.info("api apbaseinfo request protobuf body is null...");
@@ -27,7 +27,7 @@ public class ApInfoController {
         messageSender.send(Message.builder().type(MessageType.AP_BASE_INFO.getValue()).body(new JsonFormat().printToString(apBaseInfo)).build());
     }
 
-    @RequestMapping(value = "/apstatusinfo", method = RequestMethod.POST)
+    @RequestMapping(value = "/apstatusinfo", method = RequestMethod.POST,consumes = "application/x-protobuf")
     public void apStatusInfoReceive(@RequestBody ApStatusInfoProto.ApStatusInfo apStatusInfo) {
         if(apStatusInfo == null){
             log.info("api apstatusinfo request protobuf body is null...");
@@ -36,7 +36,7 @@ public class ApInfoController {
         messageSender.send(Message.builder().type(MessageType.AP_STATUS_INFO.getValue()).body(new JsonFormat().printToString(apStatusInfo)).build());
     }
 
-    @RequestMapping(value = "/aponlinestainfo", method = RequestMethod.POST)
+    @RequestMapping(value = "/aponlinestainfo", method = RequestMethod.POST,consumes = "application/x-protobuf")
     public void apOnlineStaInfoReceive(@RequestBody ApOnlineStaInfoProto.TotalApOnlineStaInfo totalApOnlineStaInfo) {
         if(totalApOnlineStaInfo == null){
             log.info("api aponlinestainfo request protobuf body is null...");
@@ -45,7 +45,7 @@ public class ApInfoController {
         messageSender.send(Message.builder().type(MessageType.AP_ONLINE_STA_INFO.getValue()).body(new JsonFormat().printToString(totalApOnlineStaInfo)).build());
     }
 
-    @RequestMapping(value = "/apofflinestainfo", method = RequestMethod.POST)
+    @RequestMapping(value = "/apofflinestainfo", method = RequestMethod.POST,consumes = "application/x-protobuf")
     public void apOfflineStaInfoReceive(@RequestBody ApOfflineStaInfoProto.TotalApOfflineStaInfo totalApOfflineStaInfo) {
         if(totalApOfflineStaInfo == null){
             log.info("api apofflinestainfo request protobuf body is null...");

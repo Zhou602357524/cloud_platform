@@ -16,7 +16,8 @@
 		<module>messagecenter-udp</module>
 		<module>eureka-server</module>
 		<module>gateway</module>
-	</modules>
+        <module>oauth2-server</module>
+    </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
