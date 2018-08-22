@@ -5,10 +5,9 @@ import com.qianli.ilink.cloud_platform.messagecenter.heartbeat.config.HeartBeatC
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
@@ -19,13 +18,16 @@ public class UdpServerNodeManager {
     @Autowired
     private HeartBeatConfig heartBeatConfig;
 
+    /**
+     * port对应的UdpServerNodes
+     */
     private Map<String,UdpServerNode> udpServerNodeMap = new ConcurrentHashMap<>();
 
-    public void refresh(String udpServer, UdpServerNode node) {
+    protected void refresh(String udpServer, UdpServerNode node) {
         udpServerNodeMap.put(udpServer,node);
     }
 
-    public UdpServerNode get(String udpServer) {
+    protected UdpServerNode get(String udpServer) {
         return udpServerNodeMap.get(udpServer);
     }
 
@@ -33,7 +35,7 @@ public class UdpServerNodeManager {
      * 返回可用对udpServer列表
      * @return
      */
-    public List<UdpServerNode> getValidUdpServerNodeList(){
+    protected List<UdpServerNode> getValidUdpServerNodeList(){
         List<UdpServerNode> udpServerNodeList = new ArrayList<>();
         for (Map.Entry<String,UdpServerNode> entry:udpServerNodeMap.entrySet()){
             udpServerNodeList.add(entry.getValue());
@@ -43,8 +45,33 @@ public class UdpServerNodeManager {
 
     public List<String> getValidUdpServerNodes(){
         List<UdpServerNode> validUdpServerNodeList = getValidUdpServerNodeList();
-        List<String> validUdpServerNodes = validUdpServerNodeList.parallelStream().map(udpServerNode -> udpServerNode.getIp()+":"+udpServerNode.getPort()).collect(Collectors.toList());
-        return validUdpServerNodes;
+        return validUdpServerNodeList.parallelStream().map(udpServerNode -> udpServerNode.getIp()+":"+udpServerNode.getPort()).collect(Collectors.toList());
+    }
+
+    /**
+     * 返回可用udpServerIp 部署多个节点port需要一致
+     * @param ip
+     * @return
+     */
+    public String getValidUdpServerNode(String ip){
+        List<UdpServerNode> validUdpServerNodeList = getValidUdpServerNodeList();
+        /**
+         * 根据ip找不到对应的UdpServerNode 说明死绝了。
+         */
+        List<UdpServerNode> udpServerNodes = validUdpServerNodeList.parallelStream().filter(udpServerNode -> ip.equals(udpServerNode.getIp())).collect(Collectors.toList());
+        if(CollectionUtils.isEmpty(udpServerNodes)){
+            return null;
+        }
+        /**
+         * 找到对应的ip则返回，否则从可以列表选择第一个。
+         */
+        Optional<UdpServerNode> udpServerNodeOptional = udpServerNodes.parallelStream().filter(udpServerNode -> (udpServerNode.getIp()).equals(ip)).findFirst();
+        if(udpServerNodeOptional.isPresent()){
+            return ip;
+        }else{
+            return udpServerNodes.get(0).getIp();
+        }
+
     }
 
     public void refreshWithSuccess(String udpServer) {

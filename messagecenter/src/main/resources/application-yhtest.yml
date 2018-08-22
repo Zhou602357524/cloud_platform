@@ -29,7 +29,7 @@ kafka:
   batchSize: 16384
   lingerMs: 5000
 heartbeat:
-  udpServerList: 127.0.0.1:9000
+  udpServerList: 127.0.0.1:11111
   retryTimes: 3
 eureka:
   client:
