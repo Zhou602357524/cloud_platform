@@ -1,9 +1,8 @@
 package com.qianli.ilink.cloud_platform.messagecenterudp.udp;
 
 
-import com.qianli.ilink.cloud_platform.messagecenterudp.spring.customized.UdpPortConfig;
+import com.qianli.ilink.cloud_platform.messagecenterudp.spring.properties.UdpPortProperties;
 import com.qianli.ilink.cloud_platform.messagecenterudp.udp.handler.ApUserInfoMessageHandler;
-import com.qianli.ilink.cloud_platform.messagecenterudp.udp.handler.UserInternetLogMessageHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
@@ -25,7 +24,7 @@ import javax.annotation.PreDestroy;
 public class ApUserInfoUdpServer {
 
     @Autowired
-    private UdpPortConfig udpPortConfig;
+    private UdpPortProperties udpPortConfig;
 
     @Autowired
     private ApUserInfoMessageHandler apUserInfoMessageHandler;

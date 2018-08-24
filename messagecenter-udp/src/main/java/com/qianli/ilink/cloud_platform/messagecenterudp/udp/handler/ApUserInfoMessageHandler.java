@@ -1,10 +1,6 @@
 package com.qianli.ilink.cloud_platform.messagecenterudp.udp.handler;
 
-import com.google.protobuf.InvalidProtocolBufferException;
-import com.googlecode.protobuf.format.JsonFormat;
 import com.qianli.ilink.cloud_platform.messagecenterudp.enums.MessageType;
-import com.qianli.ilink.cloud_platform.messagecenterudp.pojo.dto.ApUserInfoProto;
-import com.qianli.ilink.cloud_platform.messagecenterudp.pojo.dto.Message;
 import com.qianli.ilink.cloud_platform.messagecenterudp.service.MessageSender;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
