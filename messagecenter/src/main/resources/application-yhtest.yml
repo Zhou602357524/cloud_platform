@@ -4,7 +4,7 @@ cloudPlatform:
   requestTimeOut: 5000
 spring:
   application:
-    name: message
+    name: messagecenter
 #  profiles:
 #    active: test
 #  datasource:

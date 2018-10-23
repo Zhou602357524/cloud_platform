@@ -2,7 +2,6 @@ package com.qianli.ilink.cloud_platform.messagecenter.web;
 
 import com.googlecode.protobuf.format.JsonFormat;
 import com.qianli.ilink.cloud_platform.messagecenter.enums.MessageEnum;
-import com.qianli.ilink.cloud_platform.messagecenter.heartbeat.service.UdpServerNodeManager;
 import com.qianli.ilink.cloud_platform.messagecenter.pojo.dto.*;
 import com.qianli.ilink.cloud_platform.messagecenter.service.MessageSender;
 import lombok.extern.slf4j.Slf4j;
@@ -12,17 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-
 @Slf4j
 @RestController
 public class ApInfoController {
 
     @Autowired
     private MessageSender messageSender;
-
-    @Autowired
-    private UdpServerNodeManager udpServerNodeManager;
 
     @RequestMapping(value = "/apbaseinfo", method = RequestMethod.POST,consumes = "application/x-protobuf")
     public void apBaseInfoReceive(@RequestBody ApBaseInfoProto.ApBaseInfo apBaseInfo) {
@@ -60,10 +54,14 @@ public class ApInfoController {
         messageSender.send(Message.builder().type(MessageEnum.AP_OFFLINE_STA_INFO.getMsg()).body(new JsonFormat().printToString(totalApOfflineStaInfo)).build());
     }
 
-    @RequestMapping(value = "/getValidUdpServer", method = RequestMethod.GET)
-    public String apOfflineStaInfoReceive(HttpServletRequest request) {
-        String ip = request.getParameter("ip");
-        return udpServerNodeManager.getValidUdpServerNode(ip);
-    }
+
+//    @RequestMapping(value = "/getServiceInstances", method = RequestMethod.GET)
+//    public String getServiceInstances() {
+//        List<ServiceInstance> serviceInstanceList = discoveryClient.getInstances("MESSAGECENTER");
+//        if(serviceInstanceList != null && serviceInstanceList.size() > 0){
+//            return JSON.toJSONString(serviceInstanceList.get(0));
+//        }
+//        return "1111";
+//    }
 
 }
